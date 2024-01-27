@@ -8,4 +8,4 @@
 go.work
 
 k8s/vagrant/.vagrant/
-gitignore
+.gitignore
