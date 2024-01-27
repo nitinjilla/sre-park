@@ -1,0 +1,56 @@
+# PROVISIONING VAGRANT VMs FOR OUR KUBERNETES CLUSTER
+
+# Author: Nitin Jilla
+
+Vagrant.configure("2") do |config|
+
+  config.vm.provision "shell", inline: <<-EOL
+  echo "Setting up your Kubernetes cluster!"
+  EOL
+
+  config.vm.box = "bento/ubuntu-22.04"
+  
+  # PROVISION MASTER NODE  
+  config.vm.define "cp" do |cp|
+    cp.vm.provision "shell", inline: <<-EOL 
+    echo "Provisioning control plane node!"
+    EOL
+
+    cp.vm.hostname = "cp"
+    cp.vm.network "private_network", ip: "192.168.10.10"
+    cp.vm.synced_folder "../../webservice","/webservice"
+    cp.vm.provision "shell", path: "ready-nodes.sh"
+    cp.vm.provision "shell", env: {"API_SERVER_IP" => "192.168.10.10"}, path: "start-cluster.sh"    
+    
+
+    # VIRTUAL BOX RESOURCE LIMITS FOR CONTROL PLANE
+    cp.vm.provider "virtualbox" do |vb|
+      vb.cpus = 2
+      vb.memory = 2048
+    end
+
+  end
+  
+  # PROVISION WORKER NODES
+  WN_COUNT = 2  # Set worker node count as per your requirement
+  (1..WN_COUNT).each do |i|
+    config.vm.define "wn-#{i}" do |wn|
+      wn.vm.provision "shell", inline: <<-EOL 
+      echo "Provisioning worker node #{i}"
+      EOL
+
+      wn.vm.hostname = "wn-#{i}"
+      wn.vm.network "private_network", ip: "192.168.10.#{10+i}"
+      wn.vm.provision "shell", path: "ready-nodes.sh"
+
+      # VIRTUAL BOX RESOURCE LIMITS FOR WORKER NODE
+      wn.vm.provider "virtualbox" do |vb|
+        vb.cpus = 1
+        vb.memory = 1024
+      end
+
+    end 
+
+  end 
+
+end
