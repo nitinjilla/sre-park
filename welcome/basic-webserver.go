@@ -3,7 +3,7 @@
 // Author: Nitin Jilla
 
 package main
-
+	
 import (
 	"fmt"
 	"net/http"
@@ -26,7 +26,7 @@ func main() {
 
 	err := srv.ListenAndServe()
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 }
 
