@@ -1,0 +1,17 @@
+# kubectl run web --image=nginx --dry-run=client -o yaml >> basic-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    tier: homelab
+  name: web
+spec:
+  containers:
+  - image: nginx
+    name: web
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
