@@ -1,0 +1,1 @@
+aws_vpc_zone = "eu-north-1a"
