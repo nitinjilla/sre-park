@@ -1,10 +1,16 @@
+variable "aws_ami" {
+  default     = ""
+  type        = string
+  description = "Amazon Marketplace Image used for our instance OS"
+}
+
 resource "aws_instance" "app" {
 
-  ami           = "ami-00381a880aa48c6c6"
-  instance_type = "t3.micro"
-  key_name      = "homelabs-root-key"
+  ami               = var.aws_ami
+  instance_type     = "t3.micro"
+  key_name          = "homelabs-root-key"
   availability_zone = var.aws_vpc_zone
- 
+
 
   network_interface {
     network_interface_id = aws_network_interface.ani.id
@@ -27,7 +33,7 @@ resource "aws_network_interface" "ani" {
 # EIP may require IGW to exist prior to association. 
 # Use depends_on to set an explicit dependency on the IGW.
 resource "aws_eip" "eip" {
-  
+
   domain                    = "vpc"
   network_interface         = aws_network_interface.ani.id
   associate_with_private_ip = "10.0.1.10"
