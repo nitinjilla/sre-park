@@ -13,9 +13,10 @@ mkdir -p /home/vagrant/.kube
 sudo cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
 sudo chown vagrant:vagrant /home/vagrant/.kube/config
 
-kubectl apply -f https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml
+curl https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/kubeadm-kuberouter.yaml -o kube-router.yaml
+
+kubectl apply -f kube-router.yaml
 
 #kubeadm token create --print-join-command
 # Use ^ to generate a token to join the nodes to cluster
 
-kubectl version --short
