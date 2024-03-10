@@ -35,18 +35,18 @@ sudo apt-get install -y containerd.io
 
 sudo mkdir -p /etc/containerd
 sudo containerd config default | sudo tee /etc/containerd/config.toml
-sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
-sudo systemctl restart containerd
+sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml > /dev/null
+sudo systemctl restart containerd > /dev/null
 
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.2/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
 
 # Install n-1 version, because Kubernetes version upgrade is an activity in itself
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet kubeadm kubectl 
 sudo apt-mark hold kubelet kubeadm kubectl containerd
 
-systemctl status kubelet.service && systemctl enable kubelet.service
-systemctl status containerd.service && systemctl enable containerd.service
+systemctl status kubelet.service && systemctl enable kubelet.service > /dev/null
+systemctl status containerd.service && systemctl enable containerd.service > /dev/null
