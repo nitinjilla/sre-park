@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
     cp.vm.synced_folder "../manifests","/manifests", create: true
     cp.vm.synced_folder "../../welcome","/webservice", create: true
     cp.vm.provision "shell", path: "ready-nodes.sh"
-    #cp.vm.provision "shell", env: {"API_SERVER_IP" => "192.168.10.10"}, path: "start-cluster.sh"    
+        
     
     # VIRTUAL BOX RESOURCE LIMITS FOR CONTROL PLANE
     cp.vm.provider "virtualbox" do |vb|
