@@ -31,5 +31,5 @@ func main() {
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome!")
+	fmt.Fprintf(w, "Welcome!\n")
 }
