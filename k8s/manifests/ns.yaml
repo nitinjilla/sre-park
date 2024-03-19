@@ -1,9 +1,7 @@
-# kubectl create namespace homelab --dry-run=client -o yaml >> ns.yaml
-
 apiVersion: v1
 kind: Namespace
 metadata:
   creationTimestamp: null
-  name: homelab
+  name: homelabs
 spec: {}
 status: {}

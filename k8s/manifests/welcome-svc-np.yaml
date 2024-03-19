@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    type: service
+    app: welcome 
+  name: welcome-svc
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8000
+  type: NodePort
+  selector:
+    app: welcome
+status:
+  loadBalancer: {}

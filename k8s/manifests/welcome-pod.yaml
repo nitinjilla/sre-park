@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    tier: homelab
-  name: web
+    type: pod
+    app: welcome
+  name: welcome-pod
 spec:
   containers:
-  - image: nginx
-    name: web
+  - image: nitinjilla/welcome
+    name: welcome
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
-status: {}
