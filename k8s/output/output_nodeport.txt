@@ -26,7 +26,7 @@ welcome-pod   1/1     Running   0          22m   10.5.2.3   wn-2   <none>       
 
 vagrant@cp:/manifests$ kubectl get nodes -o wide | awk '{print $1, $6}'
 NAME 		INTERNAL-IP
-cp 		    192.168.10.10
+cp 		  192.168.10.10
 wn-1 		192.168.10.11
 wn-2 		192.168.10.12
 
