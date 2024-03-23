@@ -1,0 +1,20 @@
+name: Push image to Docker Hub
+
+on:
+  push:
+    branches: [ "app" ]
+  
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build and push the Docker image
+      run: |-
+        sudo docker build -t ${{ secrets.DOCKER_USER }}/welcome:latest .
+        sudo docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWD }} docker.io
+        sudo docker tag ${{ secrets.DOCKER_USER }}/welcome welcome:latest
+        sudo docker push ${{ secrets.DOCKER_USER }}/welcome:latest
+
