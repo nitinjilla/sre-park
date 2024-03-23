@@ -5,7 +5,7 @@ metadata:
   labels:
     type: service
     app: welcome 
-  name: welcome-svc
+  name: welcome-svc-np
 spec:
   ports:
   - port: 80
