@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    type: deployment
+    app: welcome
+  name: welcome-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: welcome-dep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: welcome-dep
+    spec:
+      containers:
+      - image: nitinjilla/welcome
+        name: welcome
+        resources: {}
+status: {}
