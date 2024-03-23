@@ -16,7 +16,7 @@ import (
 )
 
 var port string = ":8000"
-var version string = "v1.1" // "latest" version tag is just for fun
+var version string = "v1.1"
 
 func main() {
 
